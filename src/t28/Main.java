@@ -1,4 +1,7 @@
 package t28;
+/**
+ * Написать программу на Java для вычисления серии чисел Фибоначчи.
+ */
 
 import java.util.stream.Stream;
 
