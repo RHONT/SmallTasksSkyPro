@@ -1,5 +1,6 @@
 package t33_34;
 
+import java.util.stream.Collector;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -33,5 +34,17 @@ public class Main {
 
         System.out.println(result);
         System.out.println(result2);
+        
+        //////////////////////////////////////
+
+        String result3 = input.chars().mapToObj(e -> (char) e).filter(e -> e != ' ').collect(Collector.of(
+                StringBuilder::new,
+                StringBuilder::append,
+                StringBuilder::append,
+                StringBuilder::toString));
+
+        System.out.println(result3);
     }
+
+
 }
