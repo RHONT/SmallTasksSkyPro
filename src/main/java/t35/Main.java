@@ -15,29 +15,31 @@ import java.util.Map;
  * При работе с более новым форматом файла .xlsx мы бы использовали классы XSSFWorkbook, XSSFSheet, XSSFRow и XSSFCell.
  *
  * Для работы со старым форматом .xls мы используем классы HSSFWorkbook, HSSFSheet, HSSFRow и HSSFCell.
+ *
+ * Работа с библиотекой Apache POI и со старым форматом таблиц .xls
  */
 public class Main {
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
+        // Открываем и читаем данные из файла в котором содержаться два листа
+        try(FileInputStream file = new FileInputStream(new File("src/main/resources/OldExcel.xls"));
+            HSSFWorkbook workbook = new HSSFWorkbook(file);
+                ) {
+            Map<Integer, List<String>> dataMap = readSheet(workbook, 0);
+            Map<Integer, List<String>> dataMap2 = readSheet(workbook, 1);
+            System.out.println(dataMap);
+            System.out.println(dataMap2);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
-        FileInputStream file = new FileInputStream(new File("src/main/resources/OldExcel.xls"));
-        // заносим в рабочую книгу данные из файла
-        HSSFWorkbook workbook = new HSSFWorkbook(file);
-        // читаем данные из листов
-        Map<Integer, List<String>> dataMap = readSheet(workbook, 0);
-        Map<Integer, List<String>> dataMap2 = readSheet(workbook, 1);
-
-        System.out.println(dataMap);
-        System.out.println(dataMap2);
-
-        workbook.close();
-        file.close();
-        //////////////////////
-
+        //Создаем и записываем произвольные данные в книгу и сохраняем ее
         HSSFWorkbook bookForWrite = createNewStyleBook();
-        writeBook(bookForWrite,"src/main/resources/CreateOldExcel.xls");
-
-
+        try {
+            writeBook(bookForWrite,"src/main/resources/CreateOldExcel.xls");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private static void writeBook(HSSFWorkbook bookForWrite, String path) throws IOException {
