@@ -20,7 +20,7 @@ public class Main {
 
     public static void main(String[] args) throws IOException {
 
-        FileInputStream file = new FileInputStream(new File("C:\\Temp\\OldExcel.xls"));
+        FileInputStream file = new FileInputStream(new File("src/main/resources/OldExcel.xls"));
         // заносим в рабочую книгу данные из файла
         HSSFWorkbook workbook = new HSSFWorkbook(file);
         // читаем данные из листов
@@ -35,14 +35,14 @@ public class Main {
         //////////////////////
 
         HSSFWorkbook bookForWrite = createNewStyleBook();
-        writeBook(bookForWrite,"C:\\Temp\\CreateOldExcel.xls");
+        writeBook(bookForWrite,"src/main/resources/CreateOldExcel.xls");
 
 
     }
 
-    private static void writeBook(HSSFWorkbook bookForWrite, String s) throws IOException {
+    private static void writeBook(HSSFWorkbook bookForWrite, String path) throws IOException {
 
-        File currDir = new File("C:\\Temp\\CreateOldExcel.xls");
+        File currDir = new File(path);
         FileOutputStream outputStream = new FileOutputStream(currDir);
         bookForWrite.write(outputStream);
         bookForWrite.close();
