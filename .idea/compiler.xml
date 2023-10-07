@@ -9,8 +9,5 @@
         <module name="SmallTasksSkyPro" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="SmallTasksSkyPro" target="11" />
-    </bytecodeTargetLevel>
   </component>
 </project>
